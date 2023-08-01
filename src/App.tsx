@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-
-import GlobalStyle from './styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
-import theme from './styles/theme';
 
-import Test from './pages/Test';
+import GlobalStyle from '@styles/GlobalStyle';
+import theme from '@styles/theme';
+
+import Main from '@pages/Main';
+import Test from '@pages/Test';
+import Result from '@pages/Result';
+import Process from '@pages/Process';
 
 function App() {
   return (
@@ -13,7 +16,10 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Routes>
-          <Route path='/' element={<Test />} />
+          <Route path='/' element={<Main />} />
+          <Route path='/test' element={<Test />} />
+          <Route path='/result' element={<Result />} />
+          <Route path='/process' element={<Process />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

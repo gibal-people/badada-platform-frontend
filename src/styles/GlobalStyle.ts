@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         background-color: #ffffff;
+        font-family: Pretendard;
     }
     a{
         color : inherit;
@@ -23,6 +24,9 @@ const GlobalStyle = createGlobalStyle`
         display: block;
         width: 100%;
         height: 100%;
+    }
+    button {
+        cursor: pointer;
     }
 `;
 
