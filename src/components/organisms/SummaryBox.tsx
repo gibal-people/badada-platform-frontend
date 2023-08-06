@@ -1,28 +1,32 @@
 import Graph from '@components/atoms/Graph';
+import MedalScore from '@components/atoms/MedalScore';
 import WorstSea from '@components/atoms/WorstSea';
 import React from 'react';
 import styled from 'styled-components';
 
+type scoreObject = {
+  total: number;
+  score: number;
+  scoreIndex: number;
+};
+
 interface Props {
-  totalPerson?: number;
-  percent?: number;
   handleWorstSea: Function;
+  handleMoveToAllSea: Function;
+  score: scoreObject;
+  worstSea: { worstSeaText: string; worstSeaMbti: string };
 }
 
-export default function SummaryBox({ totalPerson = 100, percent = 63, handleWorstSea }: Props) {
+export default function SummaryBox({ handleWorstSea, handleMoveToAllSea, score, worstSea }: Props) {
   return (
     <SummaryBoxWrapper>
-      <Graph
-        percentageGraph={75 * (percent / 100)}
-        size={80}
-        strokeWidth={20}
-        color='#34C5EF'
-        percent={percent}
-        totalPerson={totalPerson}
-        textColor='#353535'
-        fontSize={16}
+      <MedalScore score={score} handleMoveToAllSea={handleMoveToAllSea} />
+      <WorstSea
+        handleWorstSea={() => {
+          handleWorstSea(worstSea.worstSeaMbti);
+        }}
+        worstSea={worstSea}
       />
-      <WorstSea handleWorstSea={handleWorstSea} />
     </SummaryBoxWrapper>
   );
 }
@@ -31,4 +35,7 @@ const SummaryBoxWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 240px;
+  @media (max-width: 360px) {
+    width: 100%;
+  }
 `;

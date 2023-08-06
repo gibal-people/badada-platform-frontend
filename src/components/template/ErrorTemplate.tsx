@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { colors } from '@styles/theme';
+
 import { styled } from 'styled-components';
-import Logo from '@components/atoms/Logo';
 import DefaultButton from '@components/atoms/DefaultButton';
 
 export default function ErrorTemplate() {
@@ -21,14 +22,21 @@ export default function ErrorTemplate() {
         </p>
 
         <ButtonBox>
-          <DefaultButton text='처음으로 돌아가기' onClick={() => navigate('/')} />
+          <DefaultButton
+            text='처음으로 돌아가기'
+            onClick={() => navigate('/')}
+            style={{ backgroundColor: `${colors.error}` }}
+          />
 
-          <button type='button' className='textButton'>
+          <button
+            type='button'
+            className='text-button'
+            onClick={() => window.open('https://open.kakao.com/o/sYlYAfyf')}
+          >
             제보하기
           </button>
         </ButtonBox>
       </Section>
-      <Logo />
     </LayoutBox>
   );
 }
@@ -38,19 +46,21 @@ const LayoutBox = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: 40px;
-  height: 852px;
+  height: 100%;
   flex: 1 0 0;
 `;
 
 const ErrorBanner = styled.div`
   display: flex;
-  width: 393px;
+  width: 100%;
   padding: 40px 30px;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
   background: rgba(215, 0, 0, 0.25);
-
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    width: 100vw;
+  }
   .header {
     color: #af0000;
     font-family: Pretendard;
@@ -72,10 +82,10 @@ const ErrorBanner = styled.div`
 
 const Section = styled.section`
   display: flex;
-  padding-top: 100px;
+  padding: 100px 30px 0px 30px;
   flex-direction: column;
   align-items: center;
-  width: 332px;
+  width: 100%;
   gap: 100px;
   flex: 1 0 0;
 
@@ -98,7 +108,7 @@ const ButtonBox = styled.div`
   gap: 40px;
   align-self: stretch;
 
-  .textButton {
+  .text-button {
     color: #353535;
     font-family: Pretendard;
     font-size: 16px;

@@ -4,27 +4,34 @@ import styled from 'styled-components';
 import LargeButton from '@components/atoms/LargeButton';
 import PrevButton from '@components/atoms/PrevButton';
 import ProgressBar from '@components/atoms/ProgressBar';
+import Logo from '@components/atoms/Logo';
+// import DefaultButton from '@components/atoms/DefaultButton';
 
 interface Props {
-  data: { id: number; question?: string; answer: { id: number; content: string }[] };
+  index: number;
+  data: { id: number; content?: string; answer: { id: number; content: string }[] };
   onSelect: Function;
   onPrevButtonClick?: Function;
 }
 
-export default function TestTemplate({ data, onSelect, onPrevButtonClick }: Props) {
-  const index = data.id;
+export default function TestTemplate({ index, data, onSelect, onPrevButtonClick }: Props) {
   return (
     <TestTemplateWrapper>
-      <ProgressBar idx={data.id} />
-      <QuestionWrapper>{data?.question}</QuestionWrapper>
+      <ProgressBar questionNumber={data?.id} idx={index + 1} />
+      <QuestionTextWrapper>
+        <QuestionText dangerouslySetInnerHTML={{ __html: data?.content ? (data.content as string) : '' }} />
+      </QuestionTextWrapper>
+
       <div>
-        {data?.answer?.map((element) => (
-          <div className='selectButton-wrapper' key={element.id}>
-            <LargeButton text={element.content} onClick={() => onSelect()} />
-          </div>
-        ))}
+        {data?.answer &&
+          data.answer.map((element) => (
+            <div className='selectButton-wrapper' key={element.id}>
+              <LargeButton text={element?.content} onClick={() => onSelect(index, element.id)} />
+              {/* <DefaultButton text={element?.content} onClick={() => onSelect()} /> */}
+            </div>
+          ))}
       </div>
-      {index !== 1 && (
+      {index !== 0 && (
         <PrevButton
           onClick={() => {
             if (onPrevButtonClick) {
@@ -33,6 +40,9 @@ export default function TestTemplate({ data, onSelect, onPrevButtonClick }: Prop
           }}
         />
       )}
+      <LogoWrapper>
+        <Logo />
+      </LogoWrapper>
     </TestTemplateWrapper>
   );
 }
@@ -45,11 +55,22 @@ const TestTemplateWrapper = styled.div`
   }
 `;
 
-// TODO: text , 있을 시에 <br/> 태그 추가하는 convert 함수?
-const QuestionWrapper = styled.h2`
+const QuestionTextWrapper = styled.div`
   display: flex;
   align-items: center;
-  height: 320px;
-  font-size: 26px;
+  height: 180px;
+`;
+
+const QuestionText = styled.h2`
+  font-size: 24px;
   font-weight: 600;
+  line-height: 34px;
+  span {
+    color: ${({ theme }) => theme.colors.secondary};
+  }
+`;
+
+const LogoWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;

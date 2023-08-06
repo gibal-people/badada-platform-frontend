@@ -1,9 +1,5 @@
 import { create } from 'zustand';
-
-interface SelectContentState {
-  selectContent: number;
-  setSelectContent: (select: number) => void;
-}
+import { Result } from './interface';
 
 interface ReviewState {
   isBadClicked: boolean;
@@ -12,16 +8,21 @@ interface ReviewState {
   setIsGoodClicked: () => void;
 }
 
-export const useStore = create<SelectContentState>((set) => ({
-  selectContent: 0,
-  setSelectContent: (select) => {
-    set((state) => ({ ...state, selectContent: select }));
-  },
-}));
+interface ResultState {
+  result: Result | null;
+  setResult: (result: Result) => void;
+}
 
 export const useReview = create<ReviewState>((set) => ({
   isBadClicked: false,
   isGoodClicked: false,
   setIsBadClicked: () => set((state) => ({ ...state, isBadClicked: !state.isBadClicked, isGoodClicked: false })),
   setIsGoodClicked: () => set((state) => ({ ...state, isGoodClicked: !state.isGoodClicked, isBadClicked: false })),
+}));
+
+export const resultStore = create<ResultState>((set) => ({
+  result: null,
+  setResult: (result: Result) => {
+    set((state) => ({ ...state, result: { ...result } }));
+  },
 }));

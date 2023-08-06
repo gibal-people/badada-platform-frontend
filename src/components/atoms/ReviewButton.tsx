@@ -26,6 +26,9 @@ export default function ReviewButton({ text, icon, onClick }: Props) {
 }
 
 const Button = styled.button`
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
   cursor: pointer;
 `;
 
@@ -52,4 +55,8 @@ const Round = styled.div`
   gap: 10px;
   border-radius: 100px;
   background: #ececec;
+
+  &:active {
+    opacity: 0.5;
+  }
 `;

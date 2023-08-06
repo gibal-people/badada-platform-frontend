@@ -1,6 +1,6 @@
 import Logo from '@components/atoms/Logo';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface Props {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ interface Props {
 export default function PageLayout({ children, includeLogo = true, customStyles = true }: Props) {
   return (
     <TemplateContainer>
-      <TemplateWrapper>
+      <TemplateWrapper $customStyles={customStyles}>
         <ChildrenWrapper $customStyles={customStyles}>{children}</ChildrenWrapper>
         {includeLogo && (
           <LogoWrapper>
@@ -28,10 +28,25 @@ const TemplateContainer = styled.section`
   justify-content: center;
 `;
 
-const TemplateWrapper = styled.div`
+const TemplateWrapper = styled.div<{ $customStyles: boolean }>`
   position: relative;
-  width: ${({ theme }) => theme.pageStyles.width};
+  width: 100vw;
+  max-width: ${({ theme }) => theme.pageStyles.maxWidth};
   min-height: ${({ theme }) => theme.pageStyles.minHeight};
+  box-shadow: ${({ theme }) => theme.shadow.page};
+  //TODO: result page 스크롤 버그 때문에 result page 에서는 slide 적용 안됨
+  animation: ${({ theme, $customStyles }) =>
+    $customStyles
+      ? css`
+          ${theme.animation.fadeIn} 1s, ${theme.animation.slideInFromBottom} 0.6s
+        `
+      : css`
+          ${theme.animation.fadeIn} 1s
+        `};
+
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    width: 100vw;
+  }
 `;
 
 const ChildrenWrapper = styled.div<{ $customStyles: boolean }>`
