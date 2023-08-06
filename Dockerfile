@@ -21,3 +21,4 @@ RUN yarn run build
 
 # 실행
 CMD ["yarn", "start"]
+
