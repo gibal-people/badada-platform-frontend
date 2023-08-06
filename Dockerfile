@@ -1,5 +1,5 @@
 # Node.js
-FROM node:16
+FROM node:18
 
 # /app 디렉토리 생성
 RUN mkdir -p /app
