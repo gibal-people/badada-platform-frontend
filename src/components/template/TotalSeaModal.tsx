@@ -1,25 +1,29 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SeaCard from '@components/organisms/SeaCard';
-import Modal from '../layouts/ModalLayout';
+import Modal from '@components/layouts/ModalLayout';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '@styles/theme';
 
 import { getRank } from '@api/services';
 import { Rank } from '@shared/interface';
+import { analytics } from '@shared/analytics';
 
 interface Props {
   onClose: Function;
-  ref: React.RefObject<HTMLDivElement>;
 }
 
-export default function TotalSeaModal({ onClose, ref }: Props) {
+export default function TotalSeaModal({ onClose }: Props) {
   const navigate = useNavigate();
   const [cardData, setCardData] = useState([]);
 
-  const goToResult = (mbti: string) => {
-    navigate(`/result/${mbti}`);
+
+  const goToResult = (beachEng: string) => {
+      analytics.track('click_total_sea_item');
+    navigate(`/result/${beachEng}`);
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    onClose();
   };
 
   useEffect(() => {
@@ -31,10 +35,10 @@ export default function TotalSeaModal({ onClose, ref }: Props) {
   }, []);
 
   return (
-    <Modal onClose={onClose} headerBackground={colors.lightblue} ref={ref}>
+    <Modal onClose={onClose} headerBackground={colors.lightblue}>
       <CardBox>
         {cardData?.map((list: Rank, idx: number) => (
-          <SeaCard key={list?.mbti} list={list} onClick={goToResult} index={idx} />
+          <SeaCard key={list?.beach_eng} list={list} onClick={goToResult} index={idx} />
         ))}
       </CardBox>
     </Modal>

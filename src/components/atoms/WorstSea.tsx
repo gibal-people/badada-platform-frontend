@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  worstSea: { worstSeaText: string; worstSeaMbti: string };
+  worstSea: { worstSeaText: string; worstSeaEng: string };
   handleWorstSea: Function;
 }
 
@@ -15,7 +15,7 @@ export default function WorstSea({ worstSea, handleWorstSea }: Props) {
     >
       <span className='WorstSeaTitle'>최악의 바다</span>
       <img
-        src={`https://d27aaiwdisjvn.cloudfront.net/${worstSea?.worstSeaMbti}`}
+        src={`https://d27aaiwdisjvn.cloudfront.net/${worstSea.worstSeaEng}`}
         alt='worstSeaImg'
         className='worstSeaImg'
       />

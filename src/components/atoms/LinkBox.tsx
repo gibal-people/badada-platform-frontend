@@ -3,29 +3,32 @@ import { ReactComponent as LinkImg } from '@assets/LinkImg.svg';
 import { ReactComponent as LinkCopy } from '@assets/LinkCopy.svg';
 import { ReactComponent as LinkKakao } from '@assets/LinkKakao.svg';
 import styled from 'styled-components';
+import { analytics } from '@shared/analytics';
 
 interface Props {
   handleImgCopy: Function;
   handleLinkCopy: Function;
-  mbti: string;
+  beachEng: string;
 }
 
-export default function LinkBox({ handleImgCopy, handleLinkCopy, mbti }: Props) {
+export default function LinkBox({ handleImgCopy, handleLinkCopy, beachEng }: Props) {
   const handleKakao = () => {
+    analytics.track('click_kakao_share');
+
     window.Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
         title: '제 바다를 소개할게요. 당신도 나와 같은 바다라면 같이 여행 갈래요?',
         description: '#바다여행 #바다추천 #성향테스트',
-        imageUrl: `https://d27aaiwdisjvn.cloudfront.net/${mbti}`,
+        imageUrl: `https://d27aaiwdisjvn.cloudfront.net/${beachEng}`,
         link: {
-          mobileWebUrl: `https://gibal.net/result/${mbti}`,
-          webUrl: `https://gibal.net/result/${mbti}`,
+          mobileWebUrl: `https://gibal.net/result/${beachEng}`,
+          webUrl: `https://gibal.net/result/${beachEng}`,
         },
       },
       buttons: [
         {
-          title: '바다 테스트 하러가기',
+          title: '테스트 하러가기',
           link: {
             mobileWebUrl: `https://gibal.net/`,
             webUrl: `https://gibal.net/`,

@@ -6,6 +6,7 @@ import PageLayout from '@components/layouts/PageLayout';
 import TestTemplate from '@components/template/TestTemplate';
 
 import { getQna, sendResult } from '@api/services';
+import { analytics } from '@shared/analytics';
 
 export default function Test() {
   const { setResult } = resultStore();
@@ -54,9 +55,9 @@ export default function Test() {
   useEffect(() => {
     getQnaList();
   }, []);
-
+  analytics.track('page_test', { step });
   return (
-    <PageLayout includeLogo={false}>
+    <PageLayout>
       <TestTemplate
         index={step}
         // 마지막 데이터 + 1을 해서 프로그레스바가 넘어가는 모션을 보여줄 시간 벌기, 그 동안은 마지막 데이터 보여주기

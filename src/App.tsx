@@ -19,7 +19,6 @@ const ErrorFallBack = () => {
 
 function App() {
   analytics.init();
-  analytics.track('New Event');
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -28,7 +27,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Main />} />
             <Route path='/test' element={<Test />} />
-            <Route path='/result/:mbti' element={<Result />} />
+            <Route path='/result/:beachEng' element={<Result />} />
             <Route path='/process' element={<Process />} />
             <Route path='/error' element={<Error />} />
           </Routes>

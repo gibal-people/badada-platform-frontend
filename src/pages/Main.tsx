@@ -5,12 +5,13 @@ import styled from 'styled-components';
 import DefaultButton from '@components/atoms/DefaultButton';
 import VideoBackground from '@components/template/VideoBackground';
 import PageLayout from '@components/layouts/PageLayout';
+import { analytics } from '@shared/analytics';
 
 export default function Main() {
   const navigate = useNavigate();
-
+  analytics.track('page_main');
   return (
-    <PageLayout customStyles={false}>
+    <PageLayout includeLogo={false}>
       <VideoBackground>
         <MainPage>
           <MainText>
@@ -38,9 +39,6 @@ const MainPage = styled.section`
   align-items: center;
   padding: 0 50px;
   height: 100%;
-  @media (max-width: ${({ theme }) => theme.media.mobile}) {
-    width: 100vw;
-  }
 `;
 
 const MainText = styled.h1`

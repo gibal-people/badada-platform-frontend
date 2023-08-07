@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import { useReview } from '@shared/store';
 import ReviewButton from '@components/atoms/ReviewButton';
 import DefaultButton from '@components/atoms/DefaultButton';
@@ -8,13 +9,14 @@ import Modal from '@components/layouts/ModalLayout';
 
 import { sendPostFeedback } from '@api/services';
 import { FeedbackBody } from '@shared/interface';
+import { analytics } from '@shared/analytics';
 
 interface Props {
   onClose: Function;
-  ref: React.RefObject<HTMLDivElement>;
+  isOpen: boolean;
 }
 
-export default function ReviewModal({ onClose, ref }: Props) {
+export default function ReviewModal({ onClose, isOpen }: Props) {
   const { isBadClicked, isGoodClicked, setIsBadClicked, setIsGoodClicked } = useReview();
   const [input, setInput] = useState('');
   const [isDisable, setIsDisable] = useState(true);
@@ -22,6 +24,8 @@ export default function ReviewModal({ onClose, ref }: Props) {
     feedback: '',
     choice: [0, 0, 0, 0, 0],
   });
+  const { state } = useLocation();
+  const getIsPrevOpen = window.localStorage.getItem('isPrevPath');
 
   const badTextList = [
     { id: 0, text: '결과가 마음에 안들어요' },
@@ -72,7 +76,6 @@ export default function ReviewModal({ onClose, ref }: Props) {
       choice: [...body.choice, text],
     };
 
-    // console.log('postBody', postBody);
     sendPostFeedback(postBody).then((res) => {
       if (res) onClose();
     });
@@ -100,34 +103,45 @@ export default function ReviewModal({ onClose, ref }: Props) {
   };
 
   useEffect(() => {
+    if (isOpen && state) {
+      window.localStorage.setItem('isPrevPath', 'y');
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
     // TODO: post 예외처리...
     const index = body.choice.includes(1);
     if (index || body.feedback !== '' || input !== '') setIsDisable(false);
   }, [body, input]);
 
+  analytics.track('open_modal_review');
   return (
-    <Modal onClose={onClose} ref={ref}>
-      <ModalInner onClick={(e) => e.stopPropagation()}>
-        <Title>콘텐츠는 마음에 드셨나요?</Title>
+    <div>
+      {!getIsPrevOpen && isOpen && state && (
+        <Modal onClose={onClose}>
+          <ModalInner onClick={(e) => e.stopPropagation()}>
+            <Title>콘텐츠는 마음에 드셨나요?</Title>
 
-        <Buttons>
-          <ReviewButton text='좋았어요!' icon='good' onClick={handleClickGoodButton} />
-          <ReviewButton text='별로예요.' icon='bad' onClick={handleClickBadButton} />
-        </Buttons>
+            <Buttons>
+              <ReviewButton text='좋았어요!' icon='good' onClick={handleClickGoodButton} />
+              <ReviewButton text='별로예요.' icon='bad' onClick={handleClickBadButton} />
+            </Buttons>
 
-        {isGoodClicked && <ReviewTagBox data={goodTextList} onClick={handleClickTag} />}
+            {isGoodClicked && <ReviewTagBox data={goodTextList} onClick={handleClickTag} />}
 
-        {isBadClicked && <ReviewTagBox data={badTextList} onClick={handleClickTag} />}
+            {isBadClicked && <ReviewTagBox data={badTextList} onClick={handleClickTag} />}
 
-        <Input
-          placeholder='추가적인 피드백을 작성해주시면 재미있는 콘텐츠 제작에 많은 도움이 됩니다!'
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
+            <Input
+              placeholder='추가적인 피드백을 작성해주시면 재미있는 콘텐츠 제작에 많은 도움이 됩니다!'
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
 
-        <DefaultButton text='평가 보내기' onClick={() => handleSubmitFeedback(input)} disable={isDisable} />
-      </ModalInner>
-    </Modal>
+            <DefaultButton text='평가 보내기' onClick={() => handleSubmitFeedback(input)} disable={isDisable} />
+          </ModalInner>
+        </Modal>
+      )}
+    </div>
   );
 }
 
