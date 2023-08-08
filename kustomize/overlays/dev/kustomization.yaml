@@ -6,4 +6,4 @@ resources:
 images:
 - name: badada-frontend-image
   newName: 270112669095.dkr.ecr.ap-northeast-2.amazonaws.com/badada-frontend
-  newTag: dce2cb525271759156306a094aaac823ab71c914
+  newTag: f3f1db6748b12d84d08396a2d8001dbb27a97f73
