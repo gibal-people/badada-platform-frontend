@@ -14,7 +14,7 @@ export default function LinkBox({ handleImgCopy, handleLinkCopy, handleKakao }: 
     <LinkBoxWrapper>
       <span className='shared-friend'>공유하고 같이갈 친구 찾으러 가자</span>
       <div className='link-item-wrapper'>
-        <button
+        {/* <button
           className='shared-icon-wrapper'
           type='button'
           onClick={() => {
@@ -22,7 +22,7 @@ export default function LinkBox({ handleImgCopy, handleLinkCopy, handleKakao }: 
           }}
         >
           <LinkImg />
-        </button>
+        </button> */}
         <button
           className='shared-Icon-wrapper'
           type='button'
