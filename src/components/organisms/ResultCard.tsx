@@ -1,9 +1,8 @@
-import React from 'react';
-import Tag from '@components/atoms/Tag';
-import { ReactComponent as BlueCircle } from '@assets/BlueCircle.svg';
 import styled from 'styled-components';
+import Tag from '@components/atoms/Tag';
 import SummaryBox from './SummaryBox';
 import LinkBox from '@components/atoms/LinkBox';
+import { ReactComponent as BlueCircle } from '@assets/BlueCircle.svg';
 
 type seaObject = {
   seaName?: string;
@@ -23,10 +22,9 @@ interface Props {
   handleImgCopy: Function;
   handleLinkCopy: Function;
   handleMoveToAllSea: Function;
+  handleKakao: Function;
   score: scoreObject;
   worstSea: { worstSeaText: string; worstSeaEng: string };
-  mbti: string;
-  beachEng: string;
 }
 
 export default function ResultCard({
@@ -37,10 +35,9 @@ export default function ResultCard({
   handleImgCopy,
   handleLinkCopy,
   handleMoveToAllSea,
+  handleKakao,
   score,
   worstSea,
-  mbti,
-  beachEng,
 }: Props) {
   return (
     <ResultCardWrapper>
@@ -91,7 +88,7 @@ export default function ResultCard({
         </div>
       </div>
       <div className='link-box-wrapper'>
-        <LinkBox handleImgCopy={handleImgCopy} handleLinkCopy={handleLinkCopy} beachEng={beachEng} />
+        <LinkBox handleImgCopy={handleImgCopy} handleLinkCopy={handleLinkCopy} handleKakao={handleKakao} />
       </div>
     </ResultCardWrapper>
   );
@@ -105,13 +102,14 @@ const ResultCardWrapper = styled.div`
   background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 2px 4px 2px rgba(145, 205, 248, 0.2);
   .copy-img {
+    padding-top: 20px;
     background: ${({ theme }) => theme.colors.white};
     border-radius: 8px;
   }
   .sea-content-wrapper {
     display: flex;
     flex-direction: column;
-    margin: 20px 20px 40px 20px;
+    margin: 0 20px 40px 20px;
     .your-sea {
       color: ${({ theme }) => theme.colors.secondary};
       text-align: center;
@@ -157,7 +155,7 @@ const ResultCardWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0 20px 40px 20px;
+    margin: 0 20px 60px 20px;
     .recommend-title {
       color: ${({ theme }) => theme.colors.darkMatter};
       text-align: center;
@@ -188,7 +186,7 @@ const ResultCardWrapper = styled.div`
   .summary-box-wrapper {
     display: flex;
     justify-content: center;
-    margin: 0 20px 40px 20px;
+    margin: 0 20px 60px 20px;
   }
   .link-box-wrapper {
     display: flex;
