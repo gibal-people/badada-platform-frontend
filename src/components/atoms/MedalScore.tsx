@@ -13,6 +13,7 @@ interface Props {
 }
 
 export default function MedalScore({ score, handleMoveToAllSea }: Props) {
+  const percentage = ((score.score / score.total) * 100).toFixed(1);
   return (
     <MedalScoreWrapper
       onClick={() => {
@@ -23,9 +24,7 @@ export default function MedalScore({ score, handleMoveToAllSea }: Props) {
       <div className='medal-icon-img'>
         <MedalIcon index={score.scoreIndex} />
       </div>
-      <span className='score-sea-name'>
-        {score.total}명 중 {score.score}명
-      </span>
+      <span className='score-sea-name'>전체 중 {percentage}%</span>
       <button
         className='score-sea-btn'
         type='button'
