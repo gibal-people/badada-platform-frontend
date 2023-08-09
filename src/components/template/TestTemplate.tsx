@@ -56,7 +56,7 @@ const TestTemplateWrapper = styled.div`
 const QuestionTextWrapper = styled.div`
   display: flex;
   align-items: center;
-  height: 180px;
+  min-height: 180px;
 `;
 
 const QuestionText = styled.h2`

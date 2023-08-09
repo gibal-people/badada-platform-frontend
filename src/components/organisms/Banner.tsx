@@ -14,8 +14,7 @@ export default function Banner() {
         <span className='banner-instagram-text'>
           내 바다를 인스타그램에
           <br />
-          <span className='banner-instagram-tag'>#바다테스트 #바라던바다</span> <br />
-          해시태그와 함께 인증해주시면
+          <span className='banner-instagram-tag'>@gibal_people</span> 태그와 함께 인증해주시면
           <br />
           추첨을 통해 <span className='banner-instagram-coffee'>스타벅스 기프티콘</span>을 드립니다!
           <br />
