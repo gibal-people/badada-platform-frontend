@@ -13,15 +13,11 @@ interface Props {
 }
 
 export default function TestTemplate({ index, data, onSelect, onPrevButtonClick }: Props) {
-  const IS_KAKAO_BROWSER = Number(navigator.userAgent.toLocaleUpperCase().includes('KAKAOTALK'));
   return (
     <TestTemplateWrapper>
       <ProgressBar questionNumber={data?.id} idx={index + 1} />
       <QuestionTextWrapper>
-        <QuestionText
-          className={IS_KAKAO_BROWSER ? 'is-kakao-browser' : ''}
-          dangerouslySetInnerHTML={{ __html: data?.content ? (data.content as string) : '' }}
-        />
+        <QuestionText dangerouslySetInnerHTML={{ __html: data?.content ? (data.content as string) : '' }} />
       </QuestionTextWrapper>
 
       <div>
@@ -60,12 +56,9 @@ const QuestionTextWrapper = styled.div`
 `;
 
 const QuestionText = styled.h2`
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
-  line-height: 34px;
-  .is-kakao-browser {
-    font-size: 20px;
-  }
+  line-height: 32px;
   span {
     color: ${({ theme }) => theme.colors.secondary};
   }

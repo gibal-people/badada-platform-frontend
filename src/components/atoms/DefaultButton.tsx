@@ -43,7 +43,7 @@ const Button = styled.button<{ $isClicked: boolean }>`
   border-radius: 8px;
   background-color: ${({ $isClicked, theme }) => ($isClicked ? '#56A7E1' : theme.colors.primary)};
   color: ${({ theme }) => theme.colors.white};
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   box-shadow: ${({ theme }) => theme.shadow.default};
 `;

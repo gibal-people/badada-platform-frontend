@@ -12,7 +12,6 @@ import TotalSeaModal from '@components/template/TotalSeaModal';
 import ReviewModal from '@components/template/ReviewModal';
 import { callGetSeaApi } from '@api/apis';
 import { analytics } from '@shared/analytics';
-import { setMetaTags } from '@shared/seo';
 
 // FIXME: key error 확인
 // TODO: DefaultTemplate, Defaultbutton 적용 관련 확인 부탁함다
@@ -52,15 +51,6 @@ export default function Result() {
   });
   const { beachEng } = useParams();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (seaData)
-  //     setMetaTags({
-  //       title: `나의 바다 ${seaData.beach}, 당신도 나와 같은 바다라면 같이 갈래요?`,
-  //       imageUrl: `https://d27aaiwdisjvn.cloudfront.net/${seaData.beach_eng}`,
-  //     });
-  //   return () => setMetaTags({}); // 페이지 나가면 메타태그 리셋
-  // }, [seaData]);
 
   const handleWorstSea = (worstSeaMbti: string) => {
     analytics.track('click_worst_sea');

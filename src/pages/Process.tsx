@@ -50,9 +50,9 @@ export default function Process() {
 
 const ProcessPage = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 0 75px;
   width: 100%;
   height: 100%;
 
@@ -63,7 +63,7 @@ const ProcessPage = styled.div`
     font-weight: 700;
     & > div {
       display: flex;
-      align-items: center;
+      align-items: end;
     }
   }
 
