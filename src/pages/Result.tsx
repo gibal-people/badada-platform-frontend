@@ -196,6 +196,7 @@ export default function Result() {
     <PageLayout includeLogo={false} key={seaData.beach}>
       <ResultPage $resultSeaImg={`https://d27aaiwdisjvn.cloudfront.net/${seaData?.beach_eng}`}>
         <div className='result-sea-img' />
+        <div className='result-sea-img-shadow' />
         <div className='result-card-wrapper'>
           <ResultCard
             seaContent={{
@@ -268,8 +269,16 @@ const ResultPage = styled.div<{ $resultSeaImg?: string }>`
     background-size: cover;
     background-repeat: no-repeat;
   }
+  .result-sea-img-shadow {
+    position: absolute;
+    top: 308px;
+    width: 100%;
+    height: 50px;
+    background-color: ${({ theme }) => theme.colors.white};
+    box-shadow: 0px -20px 20px 10px ${({ theme }) => theme.colors.white};
+  }
   .result-card-wrapper {
-    margin-top: 160px;
+    margin-top: 220px;
     z-index: 10;
     padding: 0 30px;
   }
