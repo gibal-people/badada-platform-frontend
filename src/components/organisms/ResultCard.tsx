@@ -51,21 +51,6 @@ export default function ResultCard({
             })}
           </div>
           <div className='sea-content-list-wrapper'>
-            {seaContent?.seaContent?.map((seaContentData, seaContentIndex) => {
-              return (
-                <div className='sea-content-list-item' key={seaContentIndex}>
-                  <div className='blue-circle-wrapper'>
-                    <BlueCircle />
-                  </div>
-                  <div className='sea-content-item-wrapper'>{seaContentData}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div className='recommend-wrapper'>
-          <span className='recommend-title'>당신에게 추천하는 이유</span>
-          <div className='recommend-list-wrapper'>
             {recommendationReason?.map((recommendData, recommendIndex) => {
               return (
                 <div className='sea-content-list-item' key={recommendIndex}>
@@ -73,6 +58,21 @@ export default function ResultCard({
                     <BlueCircle />
                   </div>
                   <div className='sea-content-item-wrapper'>{recommendData}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className='recommend-wrapper'>
+          <span className='recommend-title'>{seaContent?.seaName}의 특징</span>
+          <div className='recommend-list-wrapper'>
+            {seaContent?.seaContent?.map((seaContentData, seaContentIndex) => {
+              return (
+                <div className='sea-content-list-item' key={seaContentIndex}>
+                  <div className='blue-circle-wrapper'>
+                    <BlueCircle />
+                  </div>
+                  <div className='sea-content-item-wrapper'>{seaContentData}</div>
                 </div>
               );
             })}
